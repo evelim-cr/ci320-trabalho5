@@ -1,0 +1,38 @@
+O trabalho foi criado para o aprendizado da linguagem ruby, e atraves dessa linguagem
+aprendermos a usar um banco de dados via ActiveRecord e trabalhar com associacoes. 
+
+Foi escolhido o tema Herois, para usar associacoes, dessa forma foram criadas as
+seguintes relacoes: 
+	*	Heroi com sua Identidade Secreta (1x1);
+	*	Heroi com seus Inimigos (1xn);
+	*	Herois com Quadrinhos (nXn);
+
+Algumas restricoes foram feitas para que pudessemos utilizar essas associacoes:
+
+	1ª:	Pode adicionar um Inimigo apenas se um Heroi existir. Assim se o Heroi 
+	for removido, os Inimigos automaticamente serao removidos juntos com o Heroi.
+	2ª:	Pode criar uma Identidade Secreta apenas se um Heroi ja' estiver no Banco
+	de Dados. Se o Heroi for removido, assim como os inimigos, a Identidade Secreta
+	tambem sera removida.
+	OBS: Os Quadrinhos podem ser criados independente dos herois. No qual se o 
+	usuario quiser fazer associacoes entre Quadrinhos e Herois existe a opcao numero
+	5 no menu principal para esse fim. E no caso de um dos associados for removido,
+	o outro continuara existindo, o que sera excluido e' a relacao de associacao
+	que existia entre eles.
+
+Foram criados varios Menus para facilitar a interacao do usuario.
+
+A execucao do programa e' realizada atraves de um makefile, no qual existe dois
+comandos para executar o programa:
+	1º: make novosHerois: com esse comando removemos o banco de dados, o criamos
+	novamente, e executamos o programa.
+	2º: make herois: esse comando e' usado para apenas executar o programa, sem
+	remover o banco de dados ja' criado.
+	
+A elaboracao desse trabalho foi feita pela aluna Evelim Carla Ribeiro, GRR20101622,
+para a diciplina Topicos em Programacao de Computadores, ministrada pelo professor
+Bruno Muller.
+
+
+
+
