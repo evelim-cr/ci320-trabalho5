@@ -1,4 +1,14 @@
 Heros::Application.routes.draw do
+  resources :comics_heros
+
+  resources :secret_identities
+
+  resources :enemies
+
+  resources :comics
+
+  resources :heros
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

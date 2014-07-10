@@ -1,0 +1,33 @@
+<%= form_for(@secret_identity) do |f| %>
+  <% if @secret_identity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@secret_identity.errors.count, "error") %> prohibited this secret_identity from being saved:</h2>
+
+      <ul>
+      <% @secret_identity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :occupation %><br>
+    <%= f.text_field :occupation %>
+  </div>
+  <div class="field">
+    <%= f.label :hero_id %><br>
+    <%= f.number_field :hero_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

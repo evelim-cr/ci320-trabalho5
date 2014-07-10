@@ -1,0 +1,33 @@
+<h1>Listing secret_identities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Occupation</th>
+      <th>Hero</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @secret_identities.each do |secret_identity| %>
+      <tr>
+        <td><%= secret_identity.name %></td>
+        <td><%= secret_identity.address %></td>
+        <td><%= secret_identity.occupation %></td>
+        <td><%= secret_identity.hero_id %></td>
+        <td><%= link_to 'Show', secret_identity %></td>
+        <td><%= link_to 'Edit', edit_secret_identity_path(secret_identity) %></td>
+        <td><%= link_to 'Destroy', secret_identity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Secret identity', new_secret_identity_path %>

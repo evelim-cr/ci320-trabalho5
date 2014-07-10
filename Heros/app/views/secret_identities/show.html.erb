@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @secret_identity.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @secret_identity.address %>
+</p>
+
+<p>
+  <strong>Occupation:</strong>
+  <%= @secret_identity.occupation %>
+</p>
+
+<p>
+  <strong>Hero:</strong>
+  <%= @secret_identity.hero_id %>
+</p>
+
+<%= link_to 'Edit', edit_secret_identity_path(@secret_identity) %> |
+<%= link_to 'Back', secret_identities_path %>

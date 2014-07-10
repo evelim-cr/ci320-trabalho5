@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  skills: MyString
+  city: MyString
+
+two:
+  name: MyString
+  skills: MyString
+  city: MyString

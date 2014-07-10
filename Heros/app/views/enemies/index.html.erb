@@ -1,0 +1,29 @@
+<h1>Listing enemies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hero</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @enemies.each do |enemy| %>
+      <tr>
+        <td><%= enemy.name %></td>
+        <td><%= enemy.hero_id %></td>
+        <td><%= link_to 'Show', enemy %></td>
+        <td><%= link_to 'Edit', edit_enemy_path(enemy) %></td>
+        <td><%= link_to 'Destroy', enemy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Enemy', new_enemy_path %>
