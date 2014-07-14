@@ -18,7 +18,7 @@ class SecretIdentitiesControllerTest < ActionController::TestCase
 
   test "should create secret_identity" do
     assert_difference('SecretIdentity.count') do
-      post :create, secret_identity: { address: @secret_identity.address, hero_id: @secret_identity.hero_id, name: @secret_identity.name, occupation: @secret_identity.occupation }
+      post :create, secret_identity: { address: @secret_identity.address, hero_id: @secret_identity.hero_id, name: @secret_identity.name, ocupation: @secret_identity.ocupation }
     end
 
     assert_redirected_to secret_identity_path(assigns(:secret_identity))
@@ -35,7 +35,7 @@ class SecretIdentitiesControllerTest < ActionController::TestCase
   end
 
   test "should update secret_identity" do
-    patch :update, id: @secret_identity, secret_identity: { address: @secret_identity.address, hero_id: @secret_identity.hero_id, name: @secret_identity.name, occupation: @secret_identity.occupation }
+    patch :update, id: @secret_identity, secret_identity: { address: @secret_identity.address, hero_id: @secret_identity.hero_id, name: @secret_identity.name, ocupation: @secret_identity.ocupation }
     assert_redirected_to secret_identity_path(assigns(:secret_identity))
   end
 

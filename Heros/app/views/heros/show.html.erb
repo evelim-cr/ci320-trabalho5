@@ -1,19 +1,57 @@
-<p id="notice"><%= notice %></p>
+<div class="body-show">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @hero.name %>
+	</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @hero.name %>
-</p>
+	<p>
+	  <strong>Skills:</strong>
+	  <%= @hero.skills %>
+	</p>
 
-<p>
-  <strong>Skills:</strong>
-  <%= @hero.skills %>
-</p>
+	<p>
+	  <strong>City:</strong>
+	  <%= @hero.city %>
+	</p>
 
-<p>
-  <strong>City:</strong>
-  <%= @hero.city %>
-</p>
+	<p>
+		<strong>Secret Identity:</strong>
+			<% if @hero.secretIdentity != nil %>
+				<%= link_to @hero.secretIdentity.name, secret_identity_path(@hero.secretIdentity.id)  %>
+			<%else%>
+				<p> This Hero has not  Secret Identity </p>
+			<%end%>	
+	</p>
 
-<%= link_to 'Edit', edit_hero_path(@hero) %> |
-<%= link_to 'Back', heros_path %>
+	<p>
+	  <strong>Enemies:</strong>
+		<%if !@hero.enemies.empty? %>
+			<table>
+			  	<tr><% @hero.enemies.each do |e| %>
+			  		<td><%=  link_to e.name, enemy_path(e.id)%></td>
+			  	<% end %></tr> 	 
+			</table>
+		<%else%>
+			<p>This Hero has not enemies</p>
+		<%end%>
+	</p>
+
+	<p>
+	  <strong>Comics:</strong>
+		<%if !@hero.comics.empty?%>
+			<table>
+			  	<tr><% @hero.comics.each do |c| %>
+			  		<td><%= link_to c.name, comic_path(c.id)%></td>
+			  	<% end %></tr> 	 
+			</table>
+		<%else%>
+			<p>The Hero has not Comics</p>
+		<%end%>
+	</p>
+</div>
+<% if User.find(session[:user_id]).login == "adm" %>
+	<span class="button-footer"> <%= link_to 'Edit', edit_hero_path(@hero) %> </span>
+	<span style="margin-left:10px;" class="button-footer"><%= link_to 'Back', heros_path %> </span>
+<% else %>
+	<span class="button-footer"><%= link_to 'Back', heros_path %> </span>	
+<% end %>	

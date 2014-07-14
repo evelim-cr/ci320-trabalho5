@@ -6,12 +6,38 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+<header></header>
+<menu>
+	<div class="menu" id="user_nav">  
+		<button class="button-style"><%= link_to "Hero", heros_path %> </button>
+		<button class="button-style"><%= link_to "Secret Identities", secret_identities_path %> </button>
+		<button class="button-style"><%= link_to "Enemies", enemies_path %> </button>
+		<button class="button-style"><%= link_to "Comics", comics_path %> </button>
+		<% if (session[:user_id] != nil) && (User.find(session[:user_id]).login == "adm") %>
+			<button class="button-style"><%= link_to "Associate Heros and Comics", new_comics_hero_path %> </button>
+		<% else %>
+			<button class="button-style"><%= link_to "List Association of Heros and Comics", comics_heros_path %> </button>
+		<% end %>	
+		<% if current_user %>  
+			<button class="button-style" style="float:right;" ><%= link_to "Log out", log_out_path %> </button> 
+			<div class="login">
+				Logged in as <%= current_user.login %> 
+			</div>
+		<% else %>  
+			<button class="button-style" style="float:right;"><%= link_to "Sign up", sign_up_path %></button>    
+			<button class="button-style" style="float:right;"><%= link_to "Log in", log_in_path %> </button> 
+		<% end %>  
+	</div>
+</menu>
 <body>
-	<% flash.each do |name, msg| %>  
-    	<%= content_tag :div, msg, :id => "flash#{name}" %>  
-	<% end %>
 
-<%= yield %>
+<div class="content"> 
+	<% flash.each do |name, msg| %>  
+    	<p id="notice"><%= content_tag :div, msg, :id => "flash#{name}" %></p>  
+	<% end %>	 
+
+	<%= yield %>
+</div>
 
 </body>
 </html>

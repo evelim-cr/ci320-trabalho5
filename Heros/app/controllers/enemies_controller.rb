@@ -1,5 +1,7 @@
 class EnemiesController < ApplicationController
   before_action :set_enemy, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_logged_in
+  before_action :check_user, only: [:edit, :new, :destroy]
 
   # GET /enemies
   # GET /enemies.json
@@ -10,15 +12,18 @@ class EnemiesController < ApplicationController
   # GET /enemies/1
   # GET /enemies/1.json
   def show
+    @enemie = Enemy.find(params[:id])  
   end
 
   # GET /enemies/new
   def new
     @enemy = Enemy.new
+    @hero = Hero.all
   end
 
   # GET /enemies/1/edit
   def edit
+    @hero = Hero.all 
   end
 
   # POST /enemies

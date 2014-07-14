@@ -1,6 +1,7 @@
 class HerosController < ApplicationController
   before_action :set_hero, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_logged_in
+  before_action :check_user, only: [:edit, :new, :destroy]
   # GET /heros
   # GET /heros.json
   def index

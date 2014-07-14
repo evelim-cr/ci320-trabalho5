@@ -1,6 +1,7 @@
 class ComicsHerosController < ApplicationController
   before_action :set_comics_hero, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_logged_in
+  before_action :check_user, only: [:edit, :new, :destroy]
   # GET /comics_heros
   # GET /comics_heros.json
   def index
@@ -15,10 +16,14 @@ class ComicsHerosController < ApplicationController
   # GET /comics_heros/new
   def new
     @comics_hero = ComicsHero.new
+    @hero = Hero.all
+    @comic = Comic.all
   end
 
   # GET /comics_heros/1/edit
   def edit
+    @hero = Hero.all
+    @comic = Comic.all
   end
 
   # POST /comics_heros

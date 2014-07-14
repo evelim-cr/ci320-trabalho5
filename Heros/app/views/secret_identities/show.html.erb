@@ -1,24 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="body-show">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @secret_identity.name %>
+	</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @secret_identity.name %>
-</p>
+	<p>
+	  <strong>Address:</strong>
+	  <%= @secret_identity.address %>
+	</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @secret_identity.address %>
-</p>
+	<p>
+	  <strong>Ocupation:</strong>
+	  <%= @secret_identity.ocupation %>
+	</p>
 
-<p>
-  <strong>Occupation:</strong>
-  <%= @secret_identity.occupation %>
-</p>
+	<p>
+	  <strong>Hero:</strong>
+	  <%= link_to @secret_identity.hero.name, hero_path(@secret_identity.hero.id)%>
+	</p>
+</div>
 
-<p>
-  <strong>Hero:</strong>
-  <%= @secret_identity.hero_id %>
-</p>
-
-<%= link_to 'Edit', edit_secret_identity_path(@secret_identity) %> |
-<%= link_to 'Back', secret_identities_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+	<span class="button-footer"> <%= link_to 'Edit', edit_secret_identity_path(@secret_identity) %> </span>
+	<span style="margin-left:10px;" class="button-footer"> <%= link_to 'Back', secret_identities_path %></span>
+<% else %>
+	<span class="button-footer"> <%= link_to 'Back', secret_identities_path %></span>
+<% end %>		

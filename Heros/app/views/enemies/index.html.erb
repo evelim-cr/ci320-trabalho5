@@ -1,29 +1,33 @@
-<h1>Listing enemies</h1>
+<h1>List Enemies</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Hero</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @enemies.each do |enemy| %>
+<% if @enemies.empty? %>
+  <p class="msg"> There's no Enemies to Show</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= enemy.name %></td>
-        <td><%= enemy.hero_id %></td>
-        <td><%= link_to 'Show', enemy %></td>
-        <td><%= link_to 'Edit', edit_enemy_path(enemy) %></td>
-        <td><%= link_to 'Destroy', enemy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Hero</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @enemies.each do |enemy| %>
+        <tr>
+          <td><%= enemy.name %></td>
+          <td><%= enemy.hero.name %></td>
+          <td class="button-config"><%= link_to 'More Details', enemy %></td>
+          <% if User.find(session[:user_id]).login == "adm" %>
+            <td class="button-config"><%= link_to 'Edit', edit_enemy_path(enemy) %></td>
+            <td class="button-config"><%= link_to 'Destroy', enemy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>  
 
 <br>
-
-<%= link_to 'New Enemy', new_enemy_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+  <div class="button-footer"><%= link_to 'New Enemy', new_enemy_path %></div>
+<% end %>

@@ -1,6 +1,7 @@
 class SecretIdentitiesController < ApplicationController
   before_action :set_secret_identity, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_logged_in
+  before_action :check_user, only: [:edit, :new, :destroy]
   # GET /secret_identities
   # GET /secret_identities.json
   def index
@@ -15,10 +16,12 @@ class SecretIdentitiesController < ApplicationController
   # GET /secret_identities/new
   def new
     @secret_identity = SecretIdentity.new
+    @hero = Hero.all
   end
 
   # GET /secret_identities/1/edit
   def edit
+    @hero = Hero.all
   end
 
   # POST /secret_identities
@@ -69,6 +72,6 @@ class SecretIdentitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_identity_params
-      params.require(:secret_identity).permit(:name, :address, :occupation, :hero_id)
+      params.require(:secret_identity).permit(:name, :address, :ocupation, :hero_id)
     end
 end

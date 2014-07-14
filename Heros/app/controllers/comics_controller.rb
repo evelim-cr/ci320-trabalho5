@@ -1,6 +1,7 @@
 class ComicsController < ApplicationController
   before_action :set_comic, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_logged_in
+  before_action :check_user, only: [:edit, :new, :destroy]
   # GET /comics
   # GET /comics.json
   def index

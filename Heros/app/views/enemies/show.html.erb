@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="body-show">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @enemy.name %>
+	</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @enemy.name %>
-</p>
+	<p>
+	  <strong>Hero:</strong>
+	  <%= link_to @enemy.hero.name, hero_path(@enemy.hero.id) %>
+	</p>
+</div>	
 
-<p>
-  <strong>Hero:</strong>
-  <%= @enemy.hero_id %>
-</p>
-
-<%= link_to 'Edit', edit_enemy_path(@enemy) %> |
-<%= link_to 'Back', enemies_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+	<span class="button-footer"><%= link_to 'Edit', edit_enemy_path(@enemy) %> </span>
+	<span style="margin-left:10px;"class="button-footer"><%= link_to 'Back', enemies_path %></span>
+<% else %>
+	<span class="button-footer"><%= link_to 'Back', enemies_path %></span>
+<% end %>		

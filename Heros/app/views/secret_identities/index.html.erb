@@ -1,33 +1,37 @@
-<h1>Listing secret_identities</h1>
+<h1>List Secret Identities</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Occupation</th>
-      <th>Hero</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @secret_identities.each do |secret_identity| %>
+<% if @secret_identities.empty? %>
+  <p class="msg"> There's no Secret Identities to Show</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= secret_identity.name %></td>
-        <td><%= secret_identity.address %></td>
-        <td><%= secret_identity.occupation %></td>
-        <td><%= secret_identity.hero_id %></td>
-        <td><%= link_to 'Show', secret_identity %></td>
-        <td><%= link_to 'Edit', edit_secret_identity_path(secret_identity) %></td>
-        <td><%= link_to 'Destroy', secret_identity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Ocupation</th>
+        <th>Hero</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @secret_identities.each do |secret_identity| %>
+        <tr>
+          <td><%= secret_identity.name %></td>
+          <td><%= secret_identity.address %></td>
+          <td><%= secret_identity.ocupation %></td>
+          <td><%= secret_identity.hero.name %></td>
+          <td class="button-config"><%= link_to 'More Details', secret_identity %></td>
+          <% if User.find(session[:user_id]).login == "adm" %>
+            <td class="button-config"><%= link_to 'Edit', edit_secret_identity_path(secret_identity) %></td>
+            <td class="button-config"><%= link_to 'Destroy', secret_identity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>  
 
 <br>
-
-<%= link_to 'New Secret identity', new_secret_identity_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+  <div class="button-footer"><%= link_to 'New Secret identity', new_secret_identity_path %></div>
+<% end %>

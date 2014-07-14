@@ -1,31 +1,34 @@
-<h1>Listing comics</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Publishing</th>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comics.each do |comic| %>
+<h1>List Comics</h1>
+<% if @comics.empty? %>
+  <p class="msg"> There's no Comics to Show</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= comic.name %></td>
-        <td><%= comic.publishing %></td>
-        <td><%= comic.date %></td>
-        <td><%= link_to 'Show', comic %></td>
-        <td><%= link_to 'Edit', edit_comic_path(comic) %></td>
-        <td><%= link_to 'Destroy', comic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Publishing</th>
+        <th>Date</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @comics.each do |comic| %>
+        <tr>
+          <td><%= comic.name %></td>
+          <td><%= comic.publishing %></td>
+          <td><%= comic.date %></td>
+          <td class="button-config"><%= link_to 'More Details', comic %></td>
+          <% if User.find(session[:user_id]).login == "adm" %>
+            <td class="button-config"><%= link_to 'Edit', edit_comic_path(comic) %></td>
+            <td class="button-config"><%= link_to 'Destroy', comic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>  
 
 <br>
-
-<%= link_to 'New Comic', new_comic_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+  <div class="button-footer"><%= link_to 'New Comic', new_comic_path %></div>
+<% end %>

@@ -1,31 +1,34 @@
-<h1>Listing heros</h1>
+<h1>List Heros</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Skills</th>
-      <th>City</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @heros.each do |hero| %>
+<% if @heros.empty? %>
+  <p class="msg"> There's no Heroes to Show</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= hero.name %></td>
-        <td><%= hero.skills %></td>
-        <td><%= hero.city %></td>
-        <td><%= link_to 'Show', hero %></td>
-        <td><%= link_to 'Edit', edit_hero_path(hero) %></td>
-        <td><%= link_to 'Destroy', hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Skills</th>
+        <th>City</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @heros.each do |hero| %>
+        <tr>
+          <td><%= hero.name %></td>
+          <td><%= hero.skills %></td>
+          <td><%= hero.city %></td>
+          <td class="button-config"><%= link_to 'More Details', hero %></td>
+          <% if User.find(session[:user_id]).login == "adm" %>
+            <td class="button-config"><%= link_to 'Edit', edit_hero_path(hero) %></td>
+            <td class="button-config"><%= link_to 'Destroy', hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>  
 
 <br>
-
-<%= link_to 'New Hero', new_hero_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+  <div class="button-footer"> <%= link_to 'New Hero', new_hero_path %> </div>
+<% end %> 

@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="body-show">
+	<p>
+	  <strong>Hero:</strong>
+	  <%= link_to Hero.find(@comics_hero.hero_id).name, hero_path(@comics_hero.hero_id) %>
+	</p>
 
-<p>
-  <strong>Hero:</strong>
-  <%= @comics_hero.hero_id %>
-</p>
-
-<p>
-  <strong>Comic:</strong>
-  <%= @comics_hero.comic_id %>
-</p>
-
-<%= link_to 'Edit', edit_comics_hero_path(@comics_hero) %> |
-<%= link_to 'Back', comics_heros_path %>
+	<p>
+	  <strong>Comic:</strong>
+	  <%= link_to Comic.find(@comics_hero.comic_id).name, comic_path(@comics_hero.comic_id) %>
+	</p>
+</div>	
+<% if User.find(session[:user_id]).login == "adm" %>
+	<span class="button-footer"> <%= link_to 'Edit', edit_comics_hero_path(@comics_hero) %> </span>
+	<span style="margin-left:10px;" class="button-footer"><%= link_to 'Back', comics_heros_path %> </span>
+<% else %>
+	<span class="button-footer"><%= link_to 'Back', comics_heros_path %> </span>
+<% end %>	

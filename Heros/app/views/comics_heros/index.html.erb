@@ -1,29 +1,31 @@
-<h1>Listing comics_heros</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Hero</th>
-      <th>Comic</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comics_heros.each do |comics_hero| %>
+<h1>List Association</h1>
+<% if @comics_heros.empty? %>
+  <p class="msg"> There's no Association to Show</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= comics_hero.hero_id %></td>
-        <td><%= comics_hero.comic_id %></td>
-        <td><%= link_to 'Show', comics_hero %></td>
-        <td><%= link_to 'Edit', edit_comics_hero_path(comics_hero) %></td>
-        <td><%= link_to 'Destroy', comics_hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Hero</th>
+        <th>Comic</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @comics_heros.each do |comics_hero| %>
+        <tr>
+          <td><%= Hero.find(comics_hero.hero_id).name %></td>
+          <td><%= Comic.find(comics_hero.comic_id).name %></td>
+          <td class="button-config"><%= link_to 'More Details', comics_hero %></td>
+          <% if User.find(session[:user_id]).login == "adm" %>
+            <td class="button-config"><%= link_to 'Edit', edit_comics_hero_path(comics_hero) %></td>
+            <td class="button-config"><%= link_to 'Destroy', comics_hero, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <br>
-
-<%= link_to 'New Comics hero', new_comics_hero_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+  <div class="button-footer"> <%= link_to 'Back', new_comics_hero_path %></div>
+<% end %>  

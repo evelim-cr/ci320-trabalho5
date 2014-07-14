@@ -1,33 +1,37 @@
-<%= form_for(@secret_identity) do |f| %>
-  <% if @secret_identity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@secret_identity.errors.count, "error") %> prohibited this secret_identity from being saved:</h2>
+<% if (@hero.empty?)%>
+  <p class="msg"> There's no Hero to create Secret Identities</p>
+<% else %>
+  <%= form_for(@secret_identity) do |f| %>
+    <% if @secret_identity.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@secret_identity.errors.count, "error") %> prohibited this secret_identity from being saved:</h2>
 
-      <ul>
-      <% @secret_identity.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @secret_identity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :address %><br>
+      <%= f.text_field :address %>
+    </div>
+    <div class="field">
+      <%= f.label :ocupation %><br>
+      <%= f.text_field :ocupation %>
+    </div>
+    <div class="field">
+    <% options = options_from_collection_for_select(@hero, 'id', 'name') %>
+      <%= f.select :hero_id , options %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "button-style"%>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :occupation %><br>
-    <%= f.text_field :occupation %>
-  </div>
-  <div class="field">
-    <%= f.label :hero_id %><br>
-    <%= f.number_field :hero_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<% end %>  

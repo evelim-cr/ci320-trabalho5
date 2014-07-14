@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710005654) do
+ActiveRecord::Schema.define(version: 20140710203738) do
 
   create_table "comics", force: true do |t|
     t.string   "name"
@@ -46,10 +46,11 @@ ActiveRecord::Schema.define(version: 20140710005654) do
   create_table "secret_identities", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "occupation"
+    t.string   "ocupation"
     t.integer  "hero_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ocupation",  default: "t"
   end
 
   create_table "users", force: true do |t|

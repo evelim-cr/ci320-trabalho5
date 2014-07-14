@@ -1,19 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="body-show">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @comic.name %>
+	</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @comic.name %>
-</p>
+	<p>
+	  <strong>Publishing:</strong>
+	  <%= @comic.publishing %>
+	</p>
 
-<p>
-  <strong>Publishing:</strong>
-  <%= @comic.publishing %>
-</p>
+	<p>
+	  <strong>Date:</strong>
+	  <%= @comic.date %>
+	</p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @comic.date %>
-</p>
+	<p>
+	  <strong>Heros:</strong>
+		<%if !@comic.heros.empty?%>
+			<table>
+			  	<tr><% @comic.heros.each do |h| %>
+			  		<td><%= link_to h.name, hero_path(h.id)%></td>
+			  	<% end %></tr> 	 
+			</table>
+		<%else%>
+			<p>The Hero not has Comics</p>
+		<%end%>
+	</p>
+</div>
 
-<%= link_to 'Edit', edit_comic_path(@comic) %> |
-<%= link_to 'Back', comics_path %>
+<% if User.find(session[:user_id]).login == "adm" %>
+	<spam class="button-footer"><%= link_to 'Edit', edit_comic_path(@comic) %></spam>
+	<spam style="margin-left:10px;" class="button-footer"><%= link_to 'Back', comics_path %></spam>
+<% else %>
+	<spam class="button-footer"><%= link_to 'Back', comics_path %></spam>	
+<% end %>	

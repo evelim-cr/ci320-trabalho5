@@ -1,25 +1,30 @@
-<%= form_for(@comics_hero) do |f| %>
-  <% if @comics_hero.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comics_hero.errors.count, "error") %> prohibited this comics_hero from being saved:</h2>
+<% if (@hero.empty?) || (@comic.empty?)%>
+  <p class="msg"> There's no Association to create</p>
+  
+<% else %>
+  <%= form_for(@comics_hero) do |f| %>
+    <% if @comics_hero.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comics_hero.errors.count, "error") %> prohibited this comics_hero from being saved:</h2>
 
-      <ul>
-      <% @comics_hero.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @comics_hero.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <% options = options_from_collection_for_select(@hero, 'id', 'name') %>
+      <%= f.select :hero_id , options %>
+    </div>
+    <div class="field">
+      <% options = options_from_collection_for_select(@comic, 'id', 'name') %>
+      <%= f.select :comic_id , options %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "button-style"%>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :hero_id %><br>
-    <%= f.number_field :hero_id %>
-  </div>
-  <div class="field">
-    <%= f.label :comic_id %><br>
-    <%= f.number_field :comic_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

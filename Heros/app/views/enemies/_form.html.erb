@@ -1,25 +1,29 @@
-<%= form_for(@enemy) do |f| %>
-  <% if @enemy.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@enemy.errors.count, "error") %> prohibited this enemy from being saved:</h2>
+<% if (@hero.empty?)%>
+  <p class="msg"> There's no Hero to create Enemies</p>
+<% else %>  
+  <%= form_for(@enemy) do |f| %>
+    <% if @enemy.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@enemy.errors.count, "error") %> prohibited this enemy from being saved:</h2>
 
-      <ul>
-      <% @enemy.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @enemy.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <% options = options_from_collection_for_select(@hero, 'id', 'name') %>
+      <%= f.select :hero_id , options %>
+    </div>           
+    <div class="actions">
+      <%= f.submit class: "button-style"%>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :hero_id %><br>
-    <%= f.number_field :hero_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<% end %>  
