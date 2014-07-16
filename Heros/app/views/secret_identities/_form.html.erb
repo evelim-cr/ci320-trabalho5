@@ -1,3 +1,4 @@
+<% @hero=Hero.all if @hero.nil? %>
 <% if (@hero.empty?)%>
   <p class="msg"> There's no Hero to create Secret Identities</p>
 <% else %>

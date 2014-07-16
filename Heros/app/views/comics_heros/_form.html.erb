@@ -1,3 +1,5 @@
+<% @hero=Hero.all if @hero.nil? %>
+<% @comic=Comic.all if @comic.nil? %>
 <% if (@hero.empty?) || (@comic.empty?)%>
   <p class="msg"> There's no Association to create</p>
   
